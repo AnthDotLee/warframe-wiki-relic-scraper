@@ -1,3 +1,7 @@
+buildscript {
+    ext.gradle_version = '5.4.1'
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
 }
@@ -18,4 +22,8 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = gradle_version
 }
