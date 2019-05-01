@@ -1,11 +1,16 @@
+import org.w3c.dom.Document
 import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 
 fun main() {
-    println("Hello World!")
+    val relicDoc = getXML("relic-data.xml")
+    println("Root element: ${relicDoc.documentElement.nodeName}")
 }
 
-fun getXML(filename: String) {
-    var builder = (DocumentBuilderFactory.newInstance()).newDocumentBuilder()
-    var file = File("relic-data.xml")
+fun getXML(filename: String): Document {
+    val builder = (DocumentBuilderFactory.newInstance()).newDocumentBuilder()
+    val file = File(filename)
+    val document = builder.parse(file)
+    document.documentElement.normalize()
+    return document
 }
