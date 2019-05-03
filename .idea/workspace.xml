@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="125b8164-803b-47b7-84a4-1c25e216d276" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Relic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Relic.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -35,7 +34,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.76586825">
+    <splitter split-orientation="horizontal" split-proportion="0.6600693">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -91,11 +90,20 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/kotlin/Relic.kt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+                <state relative-caret-position="119">
+                  <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret column="5" selection-start-column="5" selection-end-column="5" />
                 </state>
               </provider>
             </entry>
@@ -136,6 +144,7 @@
         <option value="$PROJECT_DIR$/src/main/kotlin/HelloWorld.kt" />
         <option value="$PROJECT_DIR$/relic-data.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/Relic.kt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -298,7 +307,7 @@
       <workItem from="1556730339320" duration="1201000" />
       <workItem from="1556744556483" duration="2936000" />
       <workItem from="1556820541757" duration="5782000" />
-      <workItem from="1556908266200" duration="624000" />
+      <workItem from="1556908266200" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="Updated Gradle for Wrapper">
       <created>1556492682445</created>
@@ -356,17 +365,24 @@
       <option name="project" value="LOCAL" />
       <updated>1556824327115</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added vaulted status">
+      <created>1556922012528</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1556922012528</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12633000" />
+    <option name="totallyTimeSpent" value="12694000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="31" y="45" width="2101" height="1342" extended-state="0" />
+    <frame x="31" y="45" width="2246" height="1342" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.100239806" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09372197" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -413,7 +429,8 @@
     <MESSAGE value="typo in data filename" />
     <MESSAGE value="exploratory tag logging" />
     <MESSAGE value="Finished the abomination that loads the relic information into a list for further processing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished the abomination that loads the relic information into a list for further processing" />
+    <MESSAGE value="added vaulted status" />
+    <option name="LAST_COMMIT_MESSAGE" value="added vaulted status" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -481,8 +498,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/Relic.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        <state relative-caret-position="119">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
