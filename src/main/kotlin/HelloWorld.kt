@@ -8,10 +8,9 @@ fun main() {
     val relicDoc = getXML("relic-data.xml")
     println("Root element: ${relicDoc.documentElement.nodeName}")
 
-    val relics: MutableList<Relic> = mutableListOf()
+    val relics: MutableList<Relic> = parseRelicTable(relicDoc.getElementsByTagName("tr"))
 
-    val relicList = relicDoc.getElementsByTagName("tr")
-
+    println("Size of relic after function call: ${relics.size}")
 }
 
 fun getXML(filename: String): Document {
@@ -25,26 +24,33 @@ fun getXML(filename: String): Document {
 
 fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
     val relics = mutableListOf<Relic>()
-    for (i in 0 until relicList.length) {
-        val node = relicList.item(i) as Element
-        println("Element name at ${i + 1}: ${node.tagName}")
-        println("first child: ${node.firstChild.nodeName}")
-        relics.add(
-            Relic(
-                era = node.firstChild.firstChild.textContent.trim(),
-                name = node.firstChild.nextSibling.firstChild.firstChild.textContent,
-                commonRewards = mutableListOf(
-                    node.firstChild.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
-                    node.firstChild.nextSibling.nextSibling.firstChild.firstChild.nextSibling.firstChild.firstChild.textContent.trim(),
-                    node.firstChild.nextSibling.nextSibling.firstChild.firstChild.nextSibling.nextSibling.firstChild.firstChild.textContent.trim()
-                ),
-                uncommonRewards = mutableListOf(
-                    node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
-                    node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.nextSibling.firstChild.firstChild.textContent.trim()
-                ),
-                rareReward = node.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim()
+    try {
+        for (i in 0 until relicList.length) {
+            val node = relicList.item(i) as Element
+            println("Element name at ${i + 1}: ${node.tagName}")
+            println("first child: ${node.firstChild.nodeName}")
+            relics.add(
+                Relic(
+                    era = node.firstChild.firstChild.textContent.trim(),
+                    name = node.firstChild.nextSibling.firstChild.firstChild.textContent,
+                    commonRewards = mutableListOf(
+                        node.firstChild.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
+                        node.firstChild.nextSibling.nextSibling.firstChild.firstChild.nextSibling.firstChild.firstChild.textContent.trim(),
+                        node.firstChild.nextSibling.nextSibling.firstChild.firstChild.nextSibling.nextSibling.firstChild.firstChild.textContent.trim()
+                    ),
+                    uncommonRewards = mutableListOf(
+                        node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
+                        node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.nextSibling.firstChild.firstChild.textContent.trim()
+                    ),
+                    rareReward = node.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim()
+                )
             )
-        )
+        }
+        println("resulting list size: ${relics.size}")
+
+    } catch (exception: Exception) {
+        println("Unable to parse table into list. Ex: $exception")
+        return mutableListOf()
     }
-    println("resulting list size: ${relics.size}")
+    return relics
 }
