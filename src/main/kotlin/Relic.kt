@@ -3,5 +3,6 @@ data class Relic(
     val name: String,
     val commonRewards: MutableList<String>,
     val uncommonRewards: MutableList<String>,
-    val rareReward: String
+    val rareReward: String,
+    val isVaulted: Boolean = false
 )
