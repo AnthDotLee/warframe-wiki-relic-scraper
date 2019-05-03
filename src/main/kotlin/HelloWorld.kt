@@ -9,8 +9,6 @@ fun main() {
     println("Root element: ${relicDoc.documentElement.nodeName}")
 
     val relics: MutableList<Relic> = parseRelicTable(relicDoc.getElementsByTagName("tr"))
-
-    println("Size of relic after function call: ${relics.size}")
 }
 
 fun getXML(filename: String): Document {
@@ -27,8 +25,6 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
     try {
         for (i in 0 until relicList.length) {
             val node = relicList.item(i) as Element
-            println("Element name at ${i + 1}: ${node.tagName}")
-            println("first child: ${node.firstChild.nodeName}")
             relics.add(
                 Relic(
                     era = node.firstChild.firstChild.textContent.trim(),
@@ -46,8 +42,6 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
                 )
             )
         }
-        println("resulting list size: ${relics.size}")
-
     } catch (exception: Exception) {
         println("Unable to parse table into list. Ex: $exception")
         return mutableListOf()
