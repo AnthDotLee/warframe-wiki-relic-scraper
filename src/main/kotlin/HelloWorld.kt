@@ -48,3 +48,7 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
     }
     return relics
 }
+
+fun updateVaultedStatus() {
+    throw NotImplementedError("Not done yet")
+}
