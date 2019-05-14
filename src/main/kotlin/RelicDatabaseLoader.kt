@@ -13,6 +13,11 @@ fun main() {
     println("Root element: ${relicDoc.documentElement.nodeName}")
 
     val relics: MutableList<Relic> = parseRelicTable(relicDoc.getElementsByTagName("tr"))
+    try {
+        saveRelicsToDB(relics)
+    } catch (ex: Exception) {
+        println(ex)
+    }
 }
 
 fun getXML(filename: String): Document {
@@ -43,7 +48,7 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
 
     // Insert relic using a default vaulted status
     for(relic in relics) {
-        val relicDoc = org.bson.Document("name", "Relic")
+        val relicDoc = org.bson.Document("name", relic.name)
             .append("era", relic.era)
             .append("rewards", org.bson.Document("common", relic.commonRewards)
                 .append("uncommon", relic.uncommonRewards)
