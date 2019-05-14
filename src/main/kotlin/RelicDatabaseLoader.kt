@@ -1,6 +1,7 @@
 import com.mongodb.MongoException
 import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
+import com.mongodb.client.MongoDatabase
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.NodeList
@@ -32,6 +33,23 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
         println("Connected to MongoDB")
     } catch(ex: MongoException) {
         ex.printStackTrace()
+    }
+
+    val mongoDB = mongoClient!!.getDatabase("warframe-relic-db")
+
+    // Drop the existing collection
+    val collection = mongoDB.getCollection("relics")
+    collection.drop()
+
+    // Insert relic using a default vaulted status
+    for(relic in relics) {
+        val relicDoc = org.bson.Document("name", "Relic")
+            .append("era", relic.era)
+            .append("rewards", org.bson.Document("common", relic.commonRewards)
+                .append("uncommon", relic.uncommonRewards)
+                .append("rare", relic.rareReward))
+            .append("vaulted", relic.isVaulted)
+        collection.insertOne(relicDoc)
     }
 }
 
