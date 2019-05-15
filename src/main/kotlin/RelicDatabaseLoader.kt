@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 fun main() {
     val relicDoc = getXML("relic-data.xml")
+
     println("Root element: ${relicDoc.documentElement.nodeName}")
 
     val relics: MutableList<Relic> = parseRelicTable(relicDoc.getElementsByTagName("tr"))
@@ -23,14 +24,14 @@ fun main() {
 fun getXML(filename: String): Document {
     val builder = (DocumentBuilderFactory.newInstance()).newDocumentBuilder()
     val file = File(filename)
-//TODO: handle file not found
+    //TODO: handle file not found
     val document = builder.parse(file)
     document.documentElement.normalize()
     return document
 }
 
 fun saveRelicsToDB(relics: Iterable<Relic>) {
-// Drops the whole collection and re-inserts the data
+    // Drops the whole collection and re-inserts the data
 
     var mongoClient: MongoClient? = null
     try {
@@ -42,11 +43,11 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
 
     val mongoDB = mongoClient!!.getDatabase("warframe-relic-db")
 
-// Drop the existing collection
+    // Drop the existing collection
     val collection = mongoDB.getCollection("relics")
     collection.drop()
 
-// Insert relic using a default vaulted status
+    // Insert relic using a default vaulted status
     for (relic in relics) {
         val relicDoc = org.bson.Document("name", relic.name)
             .append("era", relic.era)
@@ -59,7 +60,7 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
         collection.insertOne(relicDoc)
     }
 
-// Update the Vaulted status
+    // Update the Vaulted status
 }
 
 fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
@@ -91,6 +92,7 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
     return relics
 }
 
-fun updateVaultedStatus() {
-    throw NotImplementedError("Not done yet")
+fun getVaultedMap(relicList: NodeList) :Map<String, String> {
+    // Returns a map indexed by era, with the relic name as the value
+    throw NotImplementedError("not done yet")
 }
