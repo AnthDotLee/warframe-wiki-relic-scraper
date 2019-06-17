@@ -28,3 +28,17 @@ compileTestKotlin {
 task createWrapper(type: Wrapper) {
     gradleVersion = gradle_version
 }
+
+task createFatJar(type: Jar) {
+    manifest {
+        attributes "Main-Class" : 'RelicDataBaseLoaderKt'
+    }
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}
+
+build.dependsOn createFatJar
