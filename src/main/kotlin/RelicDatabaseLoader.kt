@@ -9,11 +9,15 @@ import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
 
 fun main() {
+    // generate a map of vaulted relics
+    val vaultedXML = getXML("vaulted-status.xml")
+    val vaultedMap: Map<String, Boolean> = getVaultedMap(vaultedXML.getElementsByTagName("span"))
+
     val relicDoc = getXML("relic-data.xml")
 
     println("Root element: ${relicDoc.documentElement.nodeName}")
 
-    val relics: MutableList<Relic> = parseRelicTable(relicDoc.getElementsByTagName("tr"))
+    val relics: MutableList<Relic> = parseRelicTable(relicDoc.getElementsByTagName("tr"), vaultedMap)
     try {
         saveRelicsToDB(relics)
     } catch (ex: Exception) {
@@ -47,9 +51,7 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
     val collection = mongoDB.getCollection("relics")
     collection.drop()
 
-    // generate a map of vaulted relics
-    val vaultedXML = getXML("vaulted-status.xml")
-    val vaultedMap: Map<String, Boolean> = getVaultedMap(vaultedXML.getElementsByTagName("span"))
+
 
     // Insert relic using a default vaulted status
     for (relic in relics) {
@@ -65,7 +67,18 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
     }
 }
 
-fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
+fun getVaultedMap(relicList: NodeList) :Map<String, Boolean> {
+    // Returns a map indexed by era, with the relic name as the value
+    val relicMap = mutableMapOf<String, Boolean>()
+    for(i in 0 until relicList.length) {
+        val node = relicList.item(i) as Element
+        println(node.firstChild.firstChild.textContent)
+        relicMap[node.firstChild.firstChild.textContent.trim().toUpperCase()] = true
+    }
+    return relicMap
+}
+
+fun parseRelicTable(relicList: NodeList, vaultedMap:Map<String, Boolean>): MutableList<Relic> {
     val relics = mutableListOf<Relic>()
     try {
         for (i in 0 until relicList.length) {
@@ -83,7 +96,8 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
                         node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
                         node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.nextSibling.firstChild.firstChild.textContent.trim()
                     ),
-                    rareReward = node.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim()
+                    rareReward = node.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
+                    isVaulted = vaultedMap[("${node.firstChild.nextSibling.firstChild.firstChild.textContent.toUpperCase()} ${node.firstChild.nextSibling.firstChild.firstChild.textContent.toUpperCase()}")] != null
                 )
             )
         }
@@ -92,15 +106,4 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
         return mutableListOf()
     }
     return relics
-}
-
-fun getVaultedMap(relicList: NodeList) :Map<String, Boolean> {
-    // Returns a map indexed by era, with the relic name as the value
-    val relicMap = mapOf<String, Boolean>()
-    for(i in 0 until relicList.length) {
-        val node = relicList.item(i) as Element
-        println(node)
-    }
-
-    return relicMap
 }
