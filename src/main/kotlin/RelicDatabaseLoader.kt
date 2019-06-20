@@ -48,7 +48,8 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
     collection.drop()
 
     // generate a map of vaulted relics
-    val vaultedXML = getXML("")
+    val vaultedXML = getXML("vaulted-status.xml")
+    val vaultedMap: Map<String, Boolean> = getVaultedMap(vaultedXML.getElementsByTagName("span"))
 
     // Insert relic using a default vaulted status
     for (relic in relics) {
@@ -62,8 +63,6 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
             .append("vaulted", relic.isVaulted)
         collection.insertOne(relicDoc)
     }
-
-    // Update the Vaulted status
 }
 
 fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
@@ -95,7 +94,13 @@ fun parseRelicTable(relicList: NodeList): MutableList<Relic> {
     return relics
 }
 
-fun getVaultedMap(relicList: NodeList) :Map<String, String> {
+fun getVaultedMap(relicList: NodeList) :Map<String, Boolean> {
     // Returns a map indexed by era, with the relic name as the value
-    throw NotImplementedError("not done yet")
+    val relicMap = mapOf<String, Boolean>()
+    for(i in 0 until relicList.length) {
+        val node = relicList.item(i) as Element
+        println(node)
+    }
+
+    return relicMap
 }
