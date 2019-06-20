@@ -47,6 +47,9 @@ fun saveRelicsToDB(relics: Iterable<Relic>) {
     val collection = mongoDB.getCollection("relics")
     collection.drop()
 
+    // generate a map of vaulted relics
+    val vaultedXML = getXML("")
+
     // Insert relic using a default vaulted status
     for (relic in relics) {
         val relicDoc = org.bson.Document("name", relic.name)
