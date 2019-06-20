@@ -97,7 +97,7 @@ fun parseRelicTable(relicList: NodeList, vaultedMap:Map<String, Boolean>): Mutab
                         node.firstChild.nextSibling.nextSibling.nextSibling.firstChild.firstChild.nextSibling.firstChild.firstChild.textContent.trim()
                     ),
                     rareReward = node.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.firstChild.firstChild.firstChild.textContent.trim(),
-                    isVaulted = vaultedMap[("${node.firstChild.nextSibling.firstChild.firstChild.textContent.toUpperCase()} ${node.firstChild.nextSibling.firstChild.firstChild.textContent.toUpperCase()}")] != null
+                    isVaulted = vaultedMap[("${node.firstChild.firstChild.textContent.trim().toUpperCase()} ${node.firstChild.nextSibling.firstChild.firstChild.textContent.trim().toUpperCase()}")] == true
                 )
             )
         }
